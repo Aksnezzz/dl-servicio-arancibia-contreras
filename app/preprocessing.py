@@ -36,10 +36,29 @@ def preprocess(images: np.ndarray, size: int = IMG_SIZE) -> np.ndarray:
     return ((out - MEAN) / STD).astype(np.float32)
 
 
-def image_bytes_to_array(img: Image.Image) -> np.ndarray:
-    """Imagen arbitraria (foto de producto) -> arreglo 28x28 estilo Fashion-MNIST."""
-    g = img.convert("L").resize((28, 28), Image.BILINEAR)
+def image_bytes_to_array(img: Image.Image, work_size: int = 256) -> np.ndarray:
+    """Foto de producto -> arreglo 28x28 al estilo Fashion-MNIST.
+
+    1. draft(): en JPEG decodifica directamente a escala reducida (1/2, 1/4 o 1/8),
+       mucho mas rapido que decodificar 12 MP completos.
+    2. Escala de grises e inversion si el fondo es claro (Fashion-MNIST: prenda clara sobre negro).
+    3. Recorta a la prenda (caja que contiene los pixeles de primer plano), la centra en un
+       cuadrado con margen y reescala a 28x28.
+    """
+    if img.format == "JPEG":
+        img.draft("L", (work_size, work_size))
+    g = img.convert("L")
+    g.thumbnail((work_size, work_size), Image.BILINEAR)
     arr = np.asarray(g, dtype=np.uint8)
-    if arr.mean() > 127:  # Fashion-MNIST: prenda clara sobre fondo negro
+    border = np.concatenate([arr[0], arr[-1], arr[:, 0], arr[:, -1]])
+    if np.median(border) > 127:
         arr = 255 - arr
-    return arr
+    fg = arr > max(40, int(np.median(border if np.median(border) <= 127 else 255 - border)) + 30)
+    if fg.any():
+        rows, cols = np.where(fg.any(1))[0], np.where(fg.any(0))[0]
+        arr = arr[rows[0]:rows[-1] + 1, cols[0]:cols[-1] + 1]
+    h, w = arr.shape
+    side = int(max(h, w) * 1.15)  # margen ~7 % por lado, como en Fashion-MNIST
+    canvas = np.zeros((side, side), dtype=np.uint8)
+    canvas[(side - h) // 2:(side - h) // 2 + h, (side - w) // 2:(side - w) // 2 + w] = arr
+    return np.asarray(Image.fromarray(canvas).resize((28, 28), Image.BILINEAR), dtype=np.uint8)
