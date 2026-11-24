@@ -1,0 +1,12 @@
+# Entrenamiento / exportación
+torch>=2.5
+torchvision>=0.20
+onnx>=1.16
+scikit-learn>=1.4
+# Inferencia (servicio)
+onnxruntime>=1.18
+numpy>=1.26
+pillow>=10.0
+psutil>=5.9
+# Notebook
+matplotlib>=3.8

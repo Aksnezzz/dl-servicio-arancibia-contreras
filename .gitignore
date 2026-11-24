@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.venv/
+.ipynb_checkpoints/
+data/
+model/*.pt
+*.onnx
+!model/model_int8.onnx
+.env
+.ruff_cache/
