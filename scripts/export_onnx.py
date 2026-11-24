@@ -1,6 +1,6 @@
 """Exporta el baseline a ONNX (FP32) y genera una version cuantizada INT8
-(cuantizacion estatica post-entrenamiento, formato QDQ, calibrada con
-300 imagenes del set de entrenamiento).
+(cuantizacion estatica post-entrenamiento, formato QDQ, por canal, calibrada con
+300 imagenes del subconjunto de entrenamiento).
 
 Salidas: model/model_fp32.onnx, model/model_int8.onnx
 """
@@ -19,10 +19,14 @@ IMG = 96
 
 
 class FashionCalib(CalibrationDataReader):
-    def __init__(self, n=300):
+    """300 imagenes de calibracion tomadas SOLO del subconjunto de entrenamiento (las mismas 12.000
+    que vio el modelo), para no tocar validacion ni prueba."""
+
+    def __init__(self, n=300, seed=42, train_samples=12000):
         x, _ = load_fashion("train")
-        g = torch.Generator().manual_seed(0)
-        idx = torch.randperm(len(x), generator=g)[:n]
+        torch.manual_seed(seed)
+        tr_idx = torch.randperm(len(x))[:train_samples]  # misma particion que train_baseline.py
+        idx = tr_idx[torch.randperm(train_samples, generator=torch.Generator().manual_seed(0))[:n]]
         self.data = iter([{"input": preprocess(x[i:i + 1], IMG).numpy()} for i in idx])
 
     def get_next(self):

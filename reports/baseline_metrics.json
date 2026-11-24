@@ -1,63 +1,73 @@
 {
   "modelo": "MobileNetV2 (ImageNet) + cabeza lineal 10 clases",
   "dataset": "Fashion-MNIST",
+  "entrada": "28x28 gris -> 96x96 bilineal, replicada a 3 canales, normalizacion ImageNet",
   "train_samples": 12000,
+  "val_samples": 5000,
   "test_samples": 10000,
   "img_size": 96,
   "epochs": 2,
   "seed": 42,
-  "accuracy": 0.9183,
-  "f1_macro": 0.9184,
+  "validacion": {
+    "accuracy": 0.9184,
+    "f1_macro": 0.9194
+  },
+  "prueba": {
+    "accuracy": 0.919,
+    "f1_macro": 0.9191
+  },
+  "accuracy": 0.919,
+  "f1_macro": 0.9191,
   "tamano_mb": 9.19,
   "tiempo_entrenamiento_s": 252.9,
   "hardware": "x86_64 - 2 vCPU",
   "por_clase": {
     "camiseta": {
-      "precision": 0.8646245059288538,
-      "recall": 0.875,
-      "f1-score": 0.8697813121272365,
+      "precision": 0.8681863230921705,
+      "recall": 0.876,
+      "f1-score": 0.8720756595321055,
       "support": 1000.0
     },
     "pantalon": {
-      "precision": 0.9959183673469387,
+      "precision": 0.9969356486210419,
       "recall": 0.976,
-      "f1-score": 0.9858585858585859,
+      "f1-score": 0.9863567458312279,
       "support": 1000.0
     },
     "sueter": {
-      "precision": 0.9158110882956879,
-      "recall": 0.892,
-      "f1-score": 0.9037487335359676,
+      "precision": 0.9203354297693921,
+      "recall": 0.878,
+      "f1-score": 0.8986693961105425,
       "support": 1000.0
     },
     "vestido": {
-      "precision": 0.9033203125,
+      "precision": 0.9015594541910331,
       "recall": 0.925,
-      "f1-score": 0.9140316205533597,
+      "f1-score": 0.9131293188548865,
       "support": 1000.0
     },
     "abrigo": {
-      "precision": 0.8877551020408163,
-      "recall": 0.87,
-      "f1-score": 0.8787878787878788,
+      "precision": 0.8772455089820359,
+      "recall": 0.879,
+      "f1-score": 0.8781218781218781,
       "support": 1000.0
     },
     "sandalia": {
-      "precision": 0.9884937238493724,
-      "recall": 0.945,
-      "f1-score": 0.9662576687116564,
+      "precision": 0.9886128364389234,
+      "recall": 0.955,
+      "f1-score": 0.9715157680569685,
       "support": 1000.0
     },
     "camisa": {
-      "precision": 0.7547169811320755,
-      "recall": 0.76,
-      "f1-score": 0.7573492775286498,
+      "precision": 0.7567030784508441,
+      "recall": 0.762,
+      "f1-score": 0.7593423019431988,
       "support": 1000.0
     },
     "zapatilla": {
-      "precision": 0.9309366130558183,
-      "recall": 0.984,
-      "f1-score": 0.9567331064657267,
+      "precision": 0.9379770992366412,
+      "recall": 0.983,
+      "f1-score": 0.9599609375,
       "support": 1000.0
     },
     "bolso": {
@@ -67,34 +77,34 @@
       "support": 1000.0
     },
     "botin": {
-      "precision": 0.9717457114026236,
+      "precision": 0.9727272727272728,
       "recall": 0.963,
-      "f1-score": 0.9673530889000502,
+      "f1-score": 0.9678391959798995,
       "support": 1000.0
     },
-    "accuracy": 0.9183,
+    "accuracy": 0.919,
     "macro avg": {
-      "precision": 0.918780719456102,
-      "recall": 0.9183,
-      "f1-score": 0.9183556547357672,
+      "precision": 0.9194767440518186,
+      "recall": 0.9189999999999999,
+      "f1-score": 0.9190666476819267,
       "support": 10000.0
     },
     "weighted avg": {
-      "precision": 0.918780719456102,
-      "recall": 0.9183,
-      "f1-score": 0.918355654735767,
+      "precision": 0.9194767440518186,
+      "recall": 0.919,
+      "f1-score": 0.9190666476819266,
       "support": 10000.0
     }
   },
   "matriz_confusion": [
     [
-      875,
+      876,
       2,
       11,
-      19,
-      3,
+      18,
+      5,
       0,
-      79,
+      77,
       0,
       11,
       0
@@ -114,23 +124,23 @@
     [
       11,
       1,
-      892,
+      878,
       9,
-      31,
+      39,
       0,
-      53,
+      59,
       0,
       3,
       0
     ],
     [
-      9,
+      10,
       0,
       7,
       925,
-      22,
+      20,
       0,
-      35,
+      36,
       0,
       2,
       0
@@ -138,11 +148,11 @@
     [
       1,
       0,
-      27,
-      25,
-      870,
+      24,
+      26,
+      879,
       0,
-      76,
+      69,
       0,
       1,
       0
@@ -153,20 +163,20 @@
       0,
       0,
       0,
-      945,
+      955,
       0,
-      42,
+      34,
       0,
-      13
+      11
     ],
     [
-      114,
+      109,
       0,
-      36,
-      29,
-      53,
+      33,
+      30,
+      58,
       0,
-      760,
+      762,
       0,
       8,
       0
@@ -179,15 +189,15 @@
       0,
       2,
       0,
-      984,
+      983,
       0,
-      14
+      15
     ],
     [
       1,
-      1,
       0,
-      1,
+      0,
+      2,
       0,
       1,
       1,

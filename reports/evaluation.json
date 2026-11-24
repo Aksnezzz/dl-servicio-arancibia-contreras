@@ -1,0 +1,42 @@
+{
+  "model_fp32.onnx": {
+    "validacion_5000": {
+      "accuracy": 0.9184,
+      "f1_macro": 0.9194,
+      "error_estandar": 0.0039,
+      "n": 5000
+    },
+    "prueba_10000": {
+      "accuracy": 0.919,
+      "f1_macro": 0.9191,
+      "error_estandar": 0.0027,
+      "n": 10000
+    },
+    "subconjunto_ci_500": {
+      "accuracy": 0.912,
+      "f1_macro": 0.9095,
+      "error_estandar": 0.0127,
+      "n": 500
+    }
+  },
+  "model_int8.onnx": {
+    "validacion_5000": {
+      "accuracy": 0.9136,
+      "f1_macro": 0.9154,
+      "error_estandar": 0.004,
+      "n": 5000
+    },
+    "prueba_10000": {
+      "accuracy": 0.9106,
+      "f1_macro": 0.9117,
+      "error_estandar": 0.0029,
+      "n": 10000
+    },
+    "subconjunto_ci_500": {
+      "accuracy": 0.92,
+      "f1_macro": 0.9183,
+      "error_estandar": 0.0121,
+      "n": 500
+    }
+  }
+}
